@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lurkr.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23ffffff'/><text x='4' y='26' font-family='Inter,Arial,sans-serif' font-weight='800' font-size='22' fill='%23111111'>L</text><circle cx='27' cy='24' r='3.5' fill='%2322c55e'/></svg>" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-shell">
+      <div class="topbar-left">
+        <div class="brand-lockup">
+          <div class="logo">
+            <div class="logo-wordmark" aria-label="Lurkr">
+              <span class="logo-wordmark-text">Lurkr</span><span class="logo-wordmark-dot">.</span>
+            </div>
+            <div class="logo-copy">
+              <span class="logo-subtext">Social Data Scraper</span>
+            </div>
+          </div>
+
+          <nav class="platform-nav" role="tablist" aria-label="Platform">
+            <button class="platform-tab active" data-platform="tiktok" role="tab" onclick="switchPlatform('tiktok')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.67a8.16 8.16 0 004.77 1.52V6.7a4.85 4.85 0 01-1-.01z"/>
+              </svg>
+              <span>TikTok</span>
+            </button>
+            <button class="platform-tab" data-platform="youtube" role="tab" onclick="switchPlatform('youtube')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.54 3.5 12 3.5 12 3.5s-7.54 0-9.38.55A3.02 3.02 0 00.5 6.19C0 8.04 0 12 0 12s0 3.96.5 5.81a3.02 3.02 0 002.12 2.14C4.46 20.5 12 20.5 12 20.5s7.54 0 9.38-.55a3.02 3.02 0 002.12-2.14C24 15.96 24 12 24 12s0-3.96-.5-5.81zM9.75 15.52V8.48L15.82 12l-6.07 3.52z"/>
+              </svg>
+              <span>YouTube</span>
+            </button>
+            <button class="platform-tab disabled" data-platform="instagram" role="tab" tabindex="-1">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+              <span>Instagram</span>
+              <span class="coming-soon-badge">Soon</span>
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <button class="btn-theme" id="btn-theme" title="Toggle theme" aria-label="Toggle dark/light mode">
+          <svg id="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+          <svg id="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+        <button class="btn-keys" id="btn-keys">
+          <span class="btn-keys-icon">⌘</span>
+          <span>API Keys</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="keys-overlay" class="drawer-overlay hidden" onclick="toggleKeys()"></div>
+
+  <aside id="keys-drawer" class="keys-drawer hidden" role="dialog" aria-label="API Keys">
+    <div class="drawer-header">
+      <span class="drawer-title">API Keys</span>
+      <button class="drawer-close" onclick="toggleKeys()">&times;</button>
+    </div>
+    <div class="key-section">
+      <div class="key-section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.67a8.16 8.16 0 004.77 1.52V6.7a4.85 4.85 0 01-1-.01z"/></svg>
+        <span>TikTok / Apify</span>
+      </div>
+      <div class="key-desc">
+        <p>Scrapes TikTok via Apify. Get one free at <a href="https://console.apify.com/account/integrations" target="_blank" rel="noopener">console.apify.com</a>.</p>
+      </div>
+      <div class="key-status warn" id="tiktok-key-status">✗ No key set</div>
+      <div class="key-input-row">
+        <input id="tiktok-key-input" type="text" placeholder="Paste Apify token" autocomplete="off" />
+        <button class="btn-eye" onclick="toggleEye('tiktok-key-input', this)">👁</button>
+      </div>
+      <div class="key-actions">
+        <button class="btn-save-key" onclick="saveKey('tiktok')">Save</button>
+        <button class="btn-clear-key" onclick="clearKey('tiktok')">Clear</button>
+      </div>
+      <div class="key-feedback" id="tiktok-key-feedback"></div>
+    </div>
+    <div class="key-section">
+      <div class="key-section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.54 3.5 12 3.5 12 3.5s-7.54 0-9.38.55A3.02 3.02 0 00.5 6.19C0 8.04 0 12 0 12s0 3.96.5 5.81a3.02 3.02 0 002.12 2.14C4.46 20.5 12 20.5 12 20.5s7.54 0 9.38-.55a3.02 3.02 0 002.12-2.14C24 15.96 24 12 24 12s0-3.96-.5-5.81zM9.75 15.52V8.48L15.82 12l-6.07 3.52z"/></svg>
+        <span>YouTube Data API v3</span>
+      </div>
+      <div class="key-desc">
+        <p>Queries YouTube directly. Get one at <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Google Cloud Console</a>.</p>
+      </div>
+      <div class="key-status warn" id="youtube-key-status">✗ No key set</div>
+      <div class="key-input-row">
+        <input id="youtube-key-input" type="text" placeholder="Paste YouTube API key" autocomplete="off" />
+        <button class="btn-eye" onclick="toggleEye('youtube-key-input', this)">👁</button>
+      </div>
+      <div class="key-actions">
+        <button class="btn-save-key" onclick="saveKey('youtube')">Save</button>
+        <button class="btn-clear-key" onclick="clearKey('youtube')">Clear</button>
+      </div>
+      <div class="key-feedback" id="youtube-key-feedback"></div>
+    </div>
+  </aside>
+
+  <div id="error-banner" class="error-banner hidden"></div>
+
+  <main class="app-shell">
+
+    <!-- ── TikTok ── -->
+    <section id="platform-tiktok" class="platform-panel">
+      <div class="panel-shell">
+        <div class="panel-head">
+          <div>
+            <h1 class="panel-title">TikTok Scraper</h1>
+            <p class="panel-subtitle">Fetch videos and comments without losing your sanity 🤩</p>
+          </div>
+        </div>
+
+        <div class="subtabs" role="tablist" aria-label="TikTok tabs">
+          <button id="tt-tab-videos" class="subtab active" onclick="ttSwitchTab('videos')">Videos</button>
+          <button id="tt-tab-comments" class="subtab" onclick="ttSwitchTab('comments')">Comments</button>
+        </div>
+
+        <!-- TikTok Videos -->
+        <div id="tt-panel-videos" class="subpanel">
+          <div class="controls">
+            <div class="controls-row">
+              <div class="field">
+                <label for="tt-username">TikTok Username or URL</label>
+                <input id="tt-username" type="text" placeholder="@username or profile URL" autocomplete="off" />
+              </div>
+              <div class="field field-sm">
+                <label for="tt-limit">Max Videos</label>
+                <input id="tt-limit" type="number" value="30" min="1" max="200" />
+              </div>
+              <div class="field field-sm">
+                <label for="tt-date-from">From Date</label>
+                <div class="date-input-wrap">
+                  <span class="date-input-icon">📅</span>
+                  <input id="tt-date-from" class="date-input" type="date" />
+                </div>
+              </div>
+              <div class="field field-sm">
+                <label for="tt-date-to">To Date</label>
+                <div class="date-input-wrap">
+                  <span class="date-input-icon">📅</span>
+                  <input id="tt-date-to" class="date-input" type="date" />
+                </div>
+              </div>
+              <div class="field field-btn">
+                <label>&nbsp;</label>
+                <button class="fetch-btn" id="tt-btn-fetch-videos" onclick="ttFetchVideos()">Fetch Videos</button>
+              </div>
+            </div>
+            <div class="controls-row controls-export" id="tt-videos-export-row" style="display:none;">
+              <span class="result-count" id="tt-videos-count"></span>
+              <div class="export-btn-group">
+                <button class="btn-export" onclick="ttExportVideosCSV()">Export CSV</button>
+                <button class="btn-export" onclick="ttExportVideosXLSX()">Export XLSX</button>
+              </div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:52px"></th>
+                  <th>Caption</th>
+                  <th class="hide-mobile">Published</th>
+                  <th class="hide-mobile" style="width:80px">Duration</th>
+                  <th style="width:88px">Views</th>
+                  <th style="width:76px">Likes</th>
+                  <th style="width:76px">Comments</th>
+                  <th class="hide-mobile" style="width:76px">Shares</th>
+                  <th style="width:36px"></th>
+                </tr>
+              </thead>
+              <tbody id="tt-videos-tbody">
+                <tr class="empty-row"><td colspan="9"><div class="empty-state"><div class="empty-icon">🎵</div><div>Enter a username and click <strong>Fetch Videos</strong></div></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TikTok Comments -->
+        <div id="tt-panel-comments" class="subpanel hidden">
+          <div class="controls">
+            <div class="controls-row">
+              <div class="field">
+                <label for="tt-video-select">Select Video</label>
+                <select id="tt-video-select">
+                  <option value="">— fetch videos first —</option>
+                </select>
+              </div>
+              <div class="field field-sm">
+                <label for="tt-comment-count">Max Comments</label>
+                <input id="tt-comment-count" type="number" value="50" min="1" max="500" />
+              </div>
+              <div class="field field-btn">
+                <label>&nbsp;</label>
+                <button class="fetch-btn" id="tt-btn-fetch-comments" onclick="ttFetchComments()">Fetch Comments</button>
+              </div>
+            </div>
+            <div class="controls-row controls-export" id="tt-comments-export-row" style="display:none;">
+              <span class="result-count" id="tt-comments-count"></span>
+              <div class="export-btn-group">
+                <button class="btn-export" onclick="ttExportCommentsCSV()">Export CSV</button>
+                <button class="btn-export" onclick="ttExportCommentsXLSX()">Export XLSX</button>
+                <button class="btn-export btn-wordcloud-trigger" onclick="ttGenerateWordCloud()">☁ Word Cloud</button>
+                
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:40px"></th>
+                    <th style="width:130px">Username</th>
+                    <th>Comment</th>
+                    <th style="width:76px">Likes</th>
+                    <th class="hide-mobile" style="width:100px">Replies</th>
+                    <th class="hide-mobile" style="width:120px">Posted</th>
+                  </tr>
+                </thead>
+                <tbody id="tt-comments-tbody">
+                  <tr class="empty-row"><td colspan="6"><div class="empty-state"><div class="empty-icon">💬</div><div>Select a video and click <strong>Fetch Comments</strong></div></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <!-- Word Cloud -->
+        <div id="tt-wordcloud-wrap" class="wordcloud-wrap hidden">
+        <div class="wordcloud-header">
+          <span class="wordcloud-title">Word Cloud</span>
+
+          <div class="wordcloud-actions">
+
+            <div class="wc-sliders">
+              <div class="wc-control">
+                <label>
+                  WORDS
+                  <span class="wc-val" id="tt-wc-words-value">120</span>
+                </label>
+                <input id="tt-wc-words" type="range" min="30" max="250" step="10" value="120">
+              </div>
+
+              <div class="wc-control">
+                <label>
+                  SIZE
+                  <span class="wc-val" id="tt-wc-font-value">100</span>
+                </label>
+                <input id="tt-wc-font" type="range" min="60" max="140" step="5" value="100">
+              </div>
+            </div>
+
+            <div class="wc-buttons">
+              <button class="wc-btn" onclick="ttRegenerateWordCloud()" title="Regenerate">↻</button>
+              <button class="wc-btn wc-btn-download" onclick="ttDownloadWordCloud()" title="Download PNG">↓</button>
+              <!-- <button class="wc-btn" onclick="ttCopyWordCloud()" title="Copy to clipboard">⧉</button> -->
+              <!-- <button class="wc-btn wc-btn-close" onclick="document.getElementById('tt-wordcloud-wrap').classList.add('hidden')" title="Close">×</button> -->
+            </div>
+
+          </div>
+        </div>
+
+        <canvas id="tt-wordcloud-canvas"></canvas>
+        </div><!-- /tt-wordcloud-wrap -->
+        </div><!-- /tt-panel-comments -->
+      </div><!-- /panel-shell -->
+    </section><!-- /platform-tiktok -->
+
+    <!-- ── YouTube ── -->
+    <section id="platform-youtube" class="platform-panel hidden">
+      <div class="panel-shell">
+        <div class="panel-head">
+          <div>
+            <h1 class="panel-title">YouTube Scraper</h1>
+            <p class="panel-subtitle">Do your channel digging and video grabbing without the chaos 🫨</p>
+          </div>
+        </div>
+
+        <div class="subtabs" role="tablist" aria-label="YouTube tabs">
+          <button id="yt-tab-videos" class="subtab active" onclick="ytSwitchTab('videos')">Videos</button>
+          <button id="yt-tab-stats" class="subtab" onclick="ytSwitchTab('stats')">Stats</button>
+        </div>
+
+        <!-- YouTube Videos (combined channel + videos) -->
+        <div id="yt-panel-videos" class="subpanel">
+          <div class="controls">
+            <div class="controls-row">
+              <div class="field">
+                <label for="yt-channel-id">Channel ID / Handle / URL</label>
+                <input id="yt-channel-id" type="text" placeholder="@channel, UC..., or channel URL" autocomplete="off" oninput="ytSyncChannelInput(this.value)" />
+              </div>
+              <div class="field field-sm">
+                <label for="yt-max-results">Max Videos</label>
+                <input id="yt-max-results" type="number" value="25" min="1" max="200" />
+              </div>
+              <div class="field field-btn">
+                <label>&nbsp;</label>
+                <button class="fetch-btn" id="yt-btn-channel" onclick="ytFetchChannelAndVideos()">Fetch Channel</button>
+              </div>
+            </div>
+            <div class="controls-row controls-export" id="yt-videos-export-row" style="display:none;">
+              <span class="result-count" id="yt-videos-count"></span>
+              <div class="export-btn-group">
+                <button class="btn-export" onclick="ytExportVideosCSV()">Export CSV</button>
+                <button class="btn-export" onclick="ytExportVideosXLSX()">Export XLSX</button>
+              </div>
+            </div>
+          </div>
+          <!-- Channel card shown inline -->
+          <div id="yt-channel-card" class="channel-card hidden">
+            <div class="channel-card-main">
+              <div id="yt-channel-thumb" class="channel-avatar-wrap"></div>
+              <div class="channel-copy">
+                <div class="channel-name-row">
+                  <h2 id="yt-channel-title" class="channel-title">—</h2>
+                  <a id="yt-channel-link" class="channel-link hidden" target="_blank" rel="noopener">Open ↗</a>
+                </div>
+                <div class="channel-meta">
+                  <span id="yt-channel-handle">—</span>
+                  <span class="dot">•</span>
+                  <span id="yt-channel-subs">—</span>
+                  <span class="dot">•</span>
+                  <span id="yt-channel-videos">—</span>
+                </div>
+                <p id="yt-channel-desc" class="channel-desc"></p>
+              </div>
+            </div>
+          </div>
+          <!-- Videos table below channel card -->
+          <div class="table-wrap" id="yt-videos-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:52px"></th>
+                  <th>Title</th>
+                  <th class="hide-mobile">Published</th>
+                  <th class="hide-mobile" style="width:80px">Duration</th>
+                  <th style="width:100px">Format</th>
+                  <th style="width:88px">Views</th>
+                  <th style="width:76px">Likes</th>
+                  <th style="width:76px">Comments</th>
+                  <th style="width:36px"></th>
+                </tr>
+              </thead>
+              <tbody id="yt-videos-tbody">
+                <tr class="empty-row"><td colspan="9"><div class="empty-state"><div class="empty-icon">📺</div><div>Enter a channel and click <strong>Fetch Channel</strong></div></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- hidden panel needed for old yt-panel-channel ref in JS -->
+        <div id="yt-panel-channel" class="subpanel hidden"></div>
+
+        <!-- YouTube Stats -->
+        <div id="yt-panel-stats" class="subpanel hidden">
+          <div class="controls">
+            <div class="controls-row">
+              <div class="field">
+                <label for="yt-video-ids">Video IDs (comma-separated)</label>
+                <input id="yt-video-ids" type="text" placeholder="dQw4w9WgXcQ, abc123, …" autocomplete="off" />
+              </div>
+              <div class="field field-btn">
+                <label>&nbsp;</label>
+                <button class="fetch-btn" id="yt-btn-stats" onclick="ytFetchStats()">Fetch Stats</button>
+              </div>
+            </div>
+            <div class="controls-row controls-export" id="yt-stats-export-row" style="display:none;">
+              <span class="result-count" id="yt-stats-count"></span>
+              <div class="export-btn-group">
+                <button class="btn-export" onclick="ytExportStatsCSV()">Export CSV</button>
+                <button class="btn-export" onclick="ytExportStatsXLSX()">Export XLSX</button>
+              </div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Video ID</th>
+                  <th style="width:88px">Views</th>
+                  <th style="width:76px">Likes</th>
+                  <th style="width:76px">Comments</th>
+                  <th class="hide-mobile" style="width:80px">Duration</th>
+                  <th style="width:36px"></th>
+                </tr>
+              </thead>
+              <tbody id="yt-stats-tbody">
+                <tr class="empty-row"><td colspan="6"><div class="empty-state"><div class="empty-icon">📊</div><div>Enter video IDs and click <strong>Fetch Stats</strong></div></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-cloud/build/d3.layout.cloud.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="/static/app.js?v=4"></script>
+</body>
+</html>
