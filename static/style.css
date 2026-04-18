@@ -258,6 +258,10 @@ html[data-theme="light"] .topbar {
     0 0 0 1px rgba(16,185,129,0.2) inset;
 }
 
+html[data-theme="light"] .platform-tab.active:hover {
+  color: #fff;
+}
+
 .platform-tab.active svg { fill: #fff !important; }
 .platform-tab.disabled {
   opacity: 0.35;
