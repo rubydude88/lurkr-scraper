@@ -1,0 +1,14 @@
+{
+  "name": "lurkr-scraper",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "esbuild src/main.ts --bundle --outfile=static/app.js --platform=browser --target=es2020 --minify",
+    "dev": "esbuild src/main.ts --bundle --outfile=static/app.js --platform=browser --target=es2020 --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "esbuild": "^0.21.0",
+    "typescript": "^5.4.0"
+  }
+}

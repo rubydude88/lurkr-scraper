@@ -1,3 +1,3 @@
-module scraperkit
+module lurkr
 
 go 1.22

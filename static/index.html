@@ -37,12 +37,11 @@
               </svg>
               <span>YouTube</span>
             </button>
-            <button class="platform-tab disabled" data-platform="instagram" role="tab" tabindex="-1">
+            <button class="platform-tab" data-platform="instagram" role="tab" onclick="switchPlatform('instagram')">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
               </svg>
               <span>Instagram</span>
-              <span class="coming-soon-badge">Soon</span>
             </button>
           </nav>
         </div>
@@ -80,6 +79,7 @@
       <span class="drawer-title">API Keys</span>
       <button class="drawer-close" onclick="toggleKeys()">&times;</button>
     </div>
+    <p class="key-privacy-note">🔒 Keys are stored securely!</p>
     <div class="key-section">
       <div class="key-section-label">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.67a8.16 8.16 0 004.77 1.52V6.7a4.85 4.85 0 01-1-.01z"/></svg>
@@ -90,7 +90,7 @@
       </div>
       <div class="key-status warn" id="tiktok-key-status">✗ No key set</div>
       <div class="key-input-row">
-        <input id="tiktok-key-input" type="text" placeholder="Paste Apify token" autocomplete="off" />
+        <input id="tiktok-key-input" type="password" placeholder="Paste Apify token" autocomplete="off" />
         <button class="btn-eye" onclick="toggleEye('tiktok-key-input', this)">👁</button>
       </div>
       <div class="key-actions">
@@ -109,7 +109,7 @@
       </div>
       <div class="key-status warn" id="youtube-key-status">✗ No key set</div>
       <div class="key-input-row">
-        <input id="youtube-key-input" type="text" placeholder="Paste YouTube API key" autocomplete="off" />
+        <input id="youtube-key-input" type="password" placeholder="Paste YouTube API key" autocomplete="off" />
         <button class="btn-eye" onclick="toggleEye('youtube-key-input', this)">👁</button>
       </div>
       <div class="key-actions">
@@ -117,6 +117,25 @@
         <button class="btn-clear-key" onclick="clearKey('youtube')">Clear</button>
       </div>
       <div class="key-feedback" id="youtube-key-feedback"></div>
+    </div>
+    <div class="key-section">
+      <div class="key-section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        <span>Instagram Session ID <span style="opacity:0.5;font-size:10px">(optional)</span></span>
+      </div>
+      <div class="key-desc">
+        <p>Required to fetch more than ~5 comments. Get from Chrome DevTools → Application → Cookies → instagram.com → <code>sessionid</code> value.</p>
+      </div>
+      <div class="key-status warn" id="ig-session-key-status">✗ Not set (max ~5 comments)</div>
+      <div class="key-input-row">
+        <input id="ig-session-key-input" type="password" placeholder="Paste Instagram sessionid" autocomplete="off" />
+        <button class="btn-eye" onclick="toggleEye('ig-session-key-input', this)">👁</button>
+      </div>
+      <div class="key-actions">
+        <button class="btn-save-key" onclick="saveKey('ig-session')">Save</button>
+        <button class="btn-clear-key" onclick="clearKey('ig-session')">Clear</button>
+      </div>
+      <div class="key-feedback" id="ig-session-key-feedback"></div>
     </div>
   </aside>
 
@@ -149,9 +168,9 @@
               </div>
               <div class="field field-sm">
                 <label for="tt-limit">Max Videos</label>
-                <input id="tt-limit" type="number" value="30" min="1" max="200" />
+                <input id="tt-limit" type="number" value="20" min="1" max="200" />
               </div>
-              <div class="field field-sm">
+              <!-- <div class="field field-sm">
                 <label for="tt-date-from">From Date</label>
                 <div class="date-input-wrap">
                   <span class="date-input-icon">📅</span>
@@ -164,7 +183,7 @@
                   <span class="date-input-icon">📅</span>
                   <input id="tt-date-to" class="date-input" type="date" />
                 </div>
-              </div>
+              </div> -->
               <div class="field field-btn">
                 <label>&nbsp;</label>
                 <button class="fetch-btn" id="tt-btn-fetch-videos" onclick="ttFetchVideos()">Fetch Videos</button>
@@ -175,6 +194,26 @@
               <div class="export-btn-group">
                 <button class="btn-export" onclick="ttExportVideosCSV()">Export CSV</button>
                 <button class="btn-export" onclick="ttExportVideosXLSX()">Export XLSX</button>
+              </div>
+            </div>
+          </div>
+          <!-- TikTok Profile Card -->
+          <div id="tt-profile-card" class="channel-card hidden">
+            <div class="channel-card-main">
+              <div id="tt-profile-thumb" class="channel-avatar-wrap"></div>
+              <div class="channel-copy">
+                <div class="channel-name-row">
+                  <h2 id="tt-profile-nickname" class="channel-title">—</h2>
+                  <a id="tt-profile-link" class="channel-link hidden" target="_blank" rel="noopener">Open ↗</a>
+                </div>
+                <div class="channel-meta">
+                  <span id="tt-profile-username">—</span>
+                  <span class="dot">•</span>
+                  <span id="tt-profile-followers">—</span>
+                  <span class="dot">•</span>
+                  <span id="tt-profile-likes">— likes</span>
+                </div>
+                <p id="tt-profile-bio" class="channel-desc"></p>
               </div>
             </div>
           </div>
@@ -269,8 +308,14 @@
                 </label>
                 <input id="tt-wc-font" type="range" min="60" max="140" step="5" value="100">
               </div>
+            <div class="wc-ngram">
+              <label class="wc-ngram-label">
+                <input type="checkbox" id="tt-wc-bigram"> BIGRAMS
+              </label>
+              <label class="wc-ngram-label">
+                <input type="checkbox" id="tt-wc-trigram"> TRIGRAMS
+              </label>
             </div>
-
             <div class="wc-buttons">
               <button class="wc-btn" onclick="ttRegenerateWordCloud()" title="Regenerate">↻</button>
               <button class="wc-btn wc-btn-download" onclick="ttDownloadWordCloud()" title="Download PNG">↓</button>
@@ -300,6 +345,7 @@
         <div class="subtabs" role="tablist" aria-label="YouTube tabs">
           <button id="yt-tab-videos" class="subtab active" onclick="ytSwitchTab('videos')">Videos</button>
           <button id="yt-tab-stats" class="subtab" onclick="ytSwitchTab('stats')">Stats</button>
+          <button id="yt-tab-comments" class="subtab" onclick="ytSwitchTab('comments')">Comments</button>
         </div>
 
         <!-- YouTube Videos (combined channel + videos) -->
@@ -413,6 +459,244 @@
           </div>
         </div>
 
+        <!-- YouTube Comments -->
+        <div id="yt-panel-comments" class="subpanel hidden">
+          <div class="controls">
+            <div class="controls-row">
+              <div class="field">
+                <label for="yt-comment-video-id">Video ID or URL</label>
+                <input id="yt-comment-video-id" type="text" placeholder="dQw4w9WgXcQ or full YouTube URL" autocomplete="off" />
+              </div>
+              <div class="field field-sm">
+                <label for="yt-comment-count">Max Comments</label>
+                <input id="yt-comment-count" type="number" value="100" min="1" max="100" />
+              </div>
+              <div class="field field-btn">
+                <label>&nbsp;</label>
+                <button class="fetch-btn" id="yt-btn-comments" onclick="ytFetchComments()">Fetch Comments</button>
+              </div>
+            </div>
+            <div class="controls-row controls-export" id="yt-comments-export-row" style="display:none;">
+              <span class="result-count" id="yt-comments-count"></span>
+              <div class="export-btn-group">
+                <button class="btn-export" onclick="ytExportCommentsCSV()">Export CSV</button>
+                <button class="btn-export" onclick="ytExportCommentsXLSX()">Export XLSX</button>
+                <button class="btn-export btn-wordcloud-trigger" onclick="ytGenerateWordCloud()">☁ Word Cloud</button>
+              </div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:40px"></th>
+                  <th style="width:130px">Username</th>
+                  <th>Comment</th>
+                  <th style="width:76px">Likes</th>
+                  <th class="hide-mobile" style="width:100px">Replies</th>
+                  <th class="hide-mobile" style="width:120px">Posted</th>
+                </tr>
+              </thead>
+              <tbody id="yt-comments-tbody">
+                <tr class="empty-row"><td colspan="6"><div class="empty-state"><div class="empty-icon">💬</div><div>Enter a video ID and click <strong>Fetch Comments</strong></div></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- YouTube Word Cloud -->
+          <div id="yt-wordcloud-wrap" class="wordcloud-wrap hidden">
+            <div class="wordcloud-header">
+              <span class="wordcloud-title">Word Cloud</span>
+              <div class="wordcloud-actions">
+                <div class="wc-sliders">
+                  <div class="wc-control">
+                    <label>WORDS <span class="wc-val" id="yt-wc-words-value">120</span></label>
+                    <input id="yt-wc-words" type="range" min="30" max="250" step="10" value="120">
+                  </div>
+                  <div class="wc-control">
+                    <label>SIZE <span class="wc-val" id="yt-wc-font-value">100</span></label>
+                    <input id="yt-wc-font" type="range" min="60" max="140" step="5" value="100">
+                  </div>
+                <div class="wc-ngram">
+              <label class="wc-ngram-label">
+                <input type="checkbox" id="yt-wc-bigram"> BIGRAMS
+              </label>
+              <label class="wc-ngram-label">
+                <input type="checkbox" id="yt-wc-trigram"> TRIGRAMS
+              </label>
+            </div>
+                <div class="wc-buttons">
+                  <button class="wc-btn" onclick="ytRegenerateWordCloud()" title="Regenerate">↻</button>
+                  <button class="wc-btn wc-btn-download" onclick="ytDownloadWordCloud()" title="Download PNG">↓</button>
+                </div>
+              </div>
+            </div>
+            <canvas id="yt-wordcloud-canvas"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Instagram ── -->
+    <section id="platform-instagram" class="platform-panel hidden">
+      <div class="panel-shell">
+        <div class="panel-head">
+          <div>
+            <h1 class="panel-title">Instagram Scraper</h1>
+            <p class="panel-subtitle">Stalk posts and comments without the guilt 📸</p>
+          </div>
+        </div>
+
+        <div class="subtabs" role="tablist" aria-label="Instagram tabs">
+          <button id="ig-tab-posts" class="subtab active" onclick="igSwitchTab('posts')">Posts</button>
+          <button id="ig-tab-comments" class="subtab" onclick="igSwitchTab('comments')">Comments</button>
+        </div>
+
+        <!-- Instagram Posts -->
+        <div id="ig-panel-posts" class="subpanel">
+          <div class="controls">
+            <div class="controls-row">
+              <div class="field">
+                <label for="ig-username">Instagram Username or URL</label>
+                <input id="ig-username" type="text" placeholder="@username or profile URL" autocomplete="off" />
+              </div>
+              <div class="field field-sm">
+                <label for="ig-limit">Max Posts</label>
+                <input id="ig-limit" type="number" value="20" min="1" max="500" />
+              </div>
+              <div class="field field-btn">
+                <label>&nbsp;</label>
+                <button class="fetch-btn" id="ig-btn-fetch-posts" onclick="igFetchPosts()">Fetch Posts</button>
+              </div>
+            </div>
+            <div class="controls-row controls-export" id="ig-posts-export-row" style="display:none;">
+              <span class="result-count" id="ig-posts-count"></span>
+              <div class="export-btn-group">
+                <button class="btn-export" onclick="igExportPostsCSV()">Export CSV</button>
+                <button class="btn-export" onclick="igExportPostsXLSX()">Export XLSX</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Instagram Profile Card -->
+          <div id="ig-profile-card" class="channel-card hidden">
+            <div class="channel-card-main">
+              <div id="ig-profile-thumb" class="channel-avatar-wrap"></div>
+              <div class="channel-copy">
+                <div class="channel-name-row">
+                  <h2 id="ig-profile-fullname" class="channel-title">—</h2>
+                  <a id="ig-profile-link" class="channel-link hidden" target="_blank" rel="noopener">Open ↗</a>
+                </div>
+                <div class="channel-meta">
+                  <span id="ig-profile-username">—</span>
+                  <span class="dot">•</span>
+                  <span id="ig-profile-followers">—</span>
+                  <span class="dot">•</span>
+                  <span id="ig-profile-posts">— posts</span>
+                </div>
+                <p id="ig-profile-bio" class="channel-desc"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:52px"></th>
+                  <th>Caption</th>
+                  <th class="hide-mobile" style="width:90px">Type</th>
+                  <th class="hide-mobile">Date</th>
+                  <th style="width:76px">Likes</th>
+                  <th style="width:76px">Comments</th>
+                  <th class="hide-mobile" style="width:76px">Views</th>
+                  <th style="width:36px"></th>
+                </tr>
+              </thead>
+              <tbody id="ig-posts-tbody">
+                <tr class="empty-row"><td colspan="8"><div class="empty-state"><div class="empty-icon">📷</div><div>Enter a username and click <strong>Fetch Posts</strong></div></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Instagram Comments -->
+        <div id="ig-panel-comments" class="subpanel hidden">
+          <div class="controls">
+            <div class="controls-row">
+              <div class="field">
+                <label for="ig-post-select">Select Post</label>
+                <select id="ig-post-select">
+                  <option value="">— fetch posts first —</option>
+                </select>
+              </div>
+              <div class="field field-sm">
+                <label for="ig-comment-count">Max Comments</label>
+                <input id="ig-comment-count" type="number" value="50" min="1" max="500" />
+              </div>
+              <div class="field field-btn">
+                <label>&nbsp;</label>
+                <button class="fetch-btn" id="ig-btn-fetch-comments" onclick="igFetchComments()">Fetch Comments</button>
+              </div>
+            </div>
+            <div class="controls-row controls-export" id="ig-comments-export-row" style="display:none;">
+              <span class="result-count" id="ig-comments-count"></span>
+              <div class="export-btn-group">
+                <button class="btn-export" onclick="igExportCommentsCSV()">Export CSV</button>
+                <button class="btn-export" onclick="igExportCommentsXLSX()">Export XLSX</button>
+                <button class="btn-export btn-wordcloud-trigger" onclick="igGenerateWordCloud()">☁ Word Cloud</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:40px"></th>
+                    <th style="width:130px">Username</th>
+                    <th>Comment</th>
+                    <th style="width:76px">Likes</th>
+                    <th class="hide-mobile" style="width:100px">Replies</th>
+                    <th class="hide-mobile" style="width:120px">Posted</th>
+                  </tr>
+                </thead>
+                <tbody id="ig-comments-tbody">
+                  <tr class="empty-row"><td colspan="6"><div class="empty-state"><div class="empty-icon">💬</div><div>Select a post and click <strong>Fetch Comments</strong></div></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Instagram Word Cloud -->
+          <div id="ig-wordcloud-wrap" class="wordcloud-wrap hidden">
+            <div class="wordcloud-header">
+              <span class="wordcloud-title">Word Cloud</span>
+              <div class="wordcloud-actions">
+                <div class="wc-sliders">
+                  <div class="wc-control">
+                    <label>WORDS <span class="wc-val" id="ig-wc-words-value">120</span></label>
+                    <input id="ig-wc-words" type="range" min="30" max="250" step="10" value="120">
+                  </div>
+                  <div class="wc-control">
+                    <label>SIZE <span class="wc-val" id="ig-wc-font-value">100</span></label>
+                    <input id="ig-wc-font" type="range" min="60" max="140" step="5" value="100">
+                  </div>
+                <div class="wc-ngram">
+              <label class="wc-ngram-label">
+                <input type="checkbox" id="ig-wc-bigram"> BIGRAMS
+              </label>
+              <label class="wc-ngram-label">
+                <input type="checkbox" id="ig-wc-trigram"> TRIGRAMS
+              </label>
+            </div>
+                <div class="wc-buttons">
+                  <button class="wc-btn" onclick="igRegenerateWordCloud()" title="Regenerate">↻</button>
+                  <button class="wc-btn wc-btn-download" onclick="igDownloadWordCloud()" title="Download PNG">↓</button>
+                </div>
+              </div>
+            </div>
+            <canvas id="ig-wordcloud-canvas"></canvas>
+          </div>
+        </div>
+
       </div>
     </section>
   </main>
@@ -420,6 +704,6 @@
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-cloud/build/d3.layout.cloud.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script src="/static/app.js?v=4"></script>
+  <script src="/static/app.js?v=5"></script>
 </body>
 </html>
