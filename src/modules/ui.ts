@@ -149,6 +149,13 @@ export function showProfileCardSkeleton(cardId: string): void {
   if (!card) return;
   card.classList.remove('hidden');
   card.classList.add('loading');
+  // Clear avatar so shimmer is visible on re-search (not obscured by previous img)
+  const avatarWrap = card.querySelector('.channel-avatar-wrap');
+  if (avatarWrap) avatarWrap.innerHTML = '';
+  // Also blank out text fields so old data doesn't flash through
+  card.querySelectorAll('.channel-title, .channel-meta, .channel-link, .channel-desc').forEach(el => {
+    (el as HTMLElement).textContent = '';
+  });
 }
 
 export function hideProfileCardSkeleton(cardId: string): void {
