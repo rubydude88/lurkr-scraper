@@ -1,6 +1,8 @@
 import type { YouTubeChannel, YouTubeVideo, YouTubeVideoStat, YouTubeComment } from './types';
 import { ytVideosData, ytStatsData, ytCommentsData, setYtVideosData, setYtStatsData, setYtCommentsData, setYtSharedChannelInput } from './state';
 import { requireKey } from './keys';
+
+let ytDateSortDir: 'desc' | 'asc' = 'desc';
 import {
   safeJson, showError, showLoading, setBtnLoading,
   numCell, emptyRow, thumbPlaceholder, avatarPlaceholder, formatDate, formatDuration,
@@ -493,8 +495,6 @@ export function ytExportCommentsXLSX(): void {
 }
 
 // ── Sort by date ──────────────────────────────────────────────────────────────
-let ytDateSortDir: 'desc' | 'asc' = 'desc';
-
 export function ytSortByDate(): void {
   if (!ytVideosData.length) return;
   ytDateSortDir = ytDateSortDir === 'desc' ? 'asc' : 'desc';

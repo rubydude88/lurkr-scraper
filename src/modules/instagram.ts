@@ -9,6 +9,8 @@ import {
 } from './ui';
 import { toCSV, downloadBlob, exportXLSX } from './export';
 
+let igDateSortDir: 'desc' | 'asc' = 'desc';
+
 export function igRenderProfile(profile: any): void {
   const card = document.getElementById('ig-profile-card');
   if (!card) return;
@@ -330,8 +332,6 @@ export function igExportCommentsXLSX(): void {
 }
 
 // ── Sort by date ──────────────────────────────────────────────────────────────
-let igDateSortDir: 'desc' | 'asc' = 'desc';
-
 export function igSortByDate(): void {
   if (!igPostsData.length) return;
   igDateSortDir = igDateSortDir === 'desc' ? 'asc' : 'desc';

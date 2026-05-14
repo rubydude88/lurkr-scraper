@@ -1,6 +1,8 @@
 import type { TikTokVideo, TikTokComment } from './types';
 import { ttVideosData, ttCommentsData, setTtVideosData, setTtCommentsData } from './state';
 import { requireKey } from './keys';
+
+let ttDateSortDir: 'desc' | 'asc' = 'desc';
 import {
   safeJson, showError, showLoading, setBtnLoading,
   numCell, emptyRow, thumbPlaceholder, avatarPlaceholder,
@@ -317,8 +319,6 @@ export function ttExportCommentsXLSX(): void {
 }
 
 // ── Sort by date ──────────────────────────────────────────────────────────────
-let ttDateSortDir: 'desc' | 'asc' = 'desc';
-
 export function ttSortByDate(): void {
   if (!ttVideosData.length) return;
   ttDateSortDir = ttDateSortDir === 'desc' ? 'asc' : 'desc';
