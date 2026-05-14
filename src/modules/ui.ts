@@ -152,9 +152,13 @@ export function showProfileCardSkeleton(cardId: string): void {
   // Clear avatar so shimmer is visible on re-search (not obscured by previous img)
   const avatarWrap = card.querySelector('.channel-avatar-wrap');
   if (avatarWrap) avatarWrap.innerHTML = '';
-  // Also blank out text fields so old data doesn't flash through
-  card.querySelectorAll('.channel-title, .channel-meta, .channel-link, .channel-desc').forEach(el => {
+  // Blank text-only fields — do NOT wipe channel-meta because it contains
+  // child <span> elements that renderProfile writes into by ID
+  card.querySelectorAll('.channel-title, .channel-desc').forEach(el => {
     (el as HTMLElement).textContent = '';
+  });
+  card.querySelectorAll('.channel-link').forEach(el => {
+    (el as HTMLElement).classList.add('hidden');
   });
 }
 
