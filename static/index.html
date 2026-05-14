@@ -83,10 +83,10 @@
     <div class="key-section">
       <div class="key-section-label">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.67a8.16 8.16 0 004.77 1.52V6.7a4.85 4.85 0 01-1-.01z"/></svg>
-        <span>TikTok / Apify</span>
+        <span>TikTok &amp; Instagram / Apify</span>
       </div>
       <div class="key-desc">
-        <p>Scrapes TikTok via Apify. Get one free at <a href="https://console.apify.com/account/integrations" target="_blank" rel="noopener">console.apify.com</a>.</p>
+        <p>Used for both TikTok and Instagram scraping via Apify. Get one free at <a href="https://console.apify.com/account/integrations" target="_blank" rel="noopener">console.apify.com</a>.</p>
       </div>
       <div class="key-status warn" id="tiktok-key-status">✗ No key set</div>
       <div class="key-input-row">
@@ -223,7 +223,7 @@
                 <tr>
                   <th style="width:52px"></th>
                   <th>Caption</th>
-                  <th class="hide-mobile">Published</th>
+                  <th class="hide-mobile sortable-th" id="tt-sort-date" onclick="ttSortByDate()" title="Sort by date">Published <span class="sort-indicator" id="tt-sort-date-indicator"></span></th>
                   <th class="hide-mobile" style="width:80px">Duration</th>
                   <th style="width:88px">Views</th>
                   <th style="width:76px">Likes</th>
@@ -400,7 +400,7 @@
                 <tr>
                   <th style="width:52px"></th>
                   <th>Title</th>
-                  <th class="hide-mobile">Published</th>
+                  <th class="hide-mobile sortable-th" id="yt-sort-date" onclick="ytSortByDate()" title="Sort by date">Published <span class="sort-indicator" id="yt-sort-date-indicator"></span></th>
                   <th class="hide-mobile" style="width:80px">Duration</th>
                   <th style="width:100px">Format</th>
                   <th style="width:88px">Views</th>
@@ -606,7 +606,7 @@
                   <th style="width:52px"></th>
                   <th>Caption</th>
                   <th class="hide-mobile" style="width:90px">Type</th>
-                  <th class="hide-mobile">Date</th>
+                  <th class="hide-mobile sortable-th" id="ig-sort-date" onclick="igSortByDate()" title="Sort by date">Date <span class="sort-indicator" id="ig-sort-date-indicator"></span></th>
                   <th style="width:76px">Likes</th>
                   <th style="width:76px">Comments</th>
                   <th class="hide-mobile" style="width:76px">Views</th>

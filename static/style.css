@@ -865,6 +865,26 @@ tbody tr:hover td {
   background: var(--surface);
 }
 
+
+.sortable-th {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+.sortable-th:hover {
+  color: var(--accent);
+}
+.sort-indicator {
+  display: inline-block;
+  font-size: 10px;
+  margin-left: 3px;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+.sortable-th:hover .sort-indicator {
+  opacity: 1;
+}
+
 tbody tr.selected td {
   background: var(--accent-dim);
 }

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"regexp"
+	"sort"
 	"strings"
 	"time"
 
@@ -162,6 +163,13 @@ func HandleInstagramPosts(c *cache.TTLCache) http.HandlerFunc {
 			posts = append(posts, itemToIGPost(item))
 		}
 
+		// Sort newest-first so display order matches real Instagram
+		sort.SliceStable(posts, func(i, j int) bool {
+			ti, _ := time.Parse(time.RFC3339, fmt.Sprintf("%v", posts[i]["timestamp"]))
+			tj, _ := time.Parse(time.RFC3339, fmt.Sprintf("%v", posts[j]["timestamp"]))
+			return ti.After(tj)
+		})
+
 		// Extract profile from dedicated details call — much richer than post owner fields
 		var profile map[string]any
 		if detailsRes.err == nil && detailsRes.status >= 200 && detailsRes.status < 300 {
@@ -184,11 +192,14 @@ func HandleInstagramPosts(c *cache.TTLCache) http.HandlerFunc {
 }
 
 func itemToIGPost(item map[string]any) map[string]any {
-	timestamp := utils.StrVal(item, "timestamp", "taken_at_timestamp")
-	if timestamp == "" {
-		for _, k := range []string{"takenAtTimestamp", "taken_at"} {
-			if v, ok := item[k]; ok {
-				timestamp = utils.ParseTimestamp(v)
+	// Apify may return "timestamp" as either a string (RFC3339) or a numeric Unix epoch.
+	// utils.StrVal only handles strings, so we must check numeric case explicitly first.
+	timestamp := ""
+	for _, k := range []string{"timestamp", "taken_at_timestamp", "takenAtTimestamp", "taken_at"} {
+		if v, ok := item[k]; ok {
+			parsed := utils.ParseTimestamp(v)
+			if parsed != "" {
+				timestamp = parsed
 				break
 			}
 		}
@@ -215,6 +226,17 @@ func itemToIGPost(item map[string]any) map[string]any {
 	}
 
 	postType := utils.StrVal(item, "type", "product_type")
+	// Also check camelCase productType which Apify uses
+	if pt := utils.StrVal(item, "productType"); pt != "" {
+		switch pt {
+		case "clips":
+			postType = "reel"
+		case "carousel_container":
+			postType = "sidecar"
+		case "feed":
+			// keep whatever "type" gave us
+		}
+	}
 	if postType == "" {
 		if utils.StrVal(item, "is_video") == "true" || item["is_video"] == true {
 			postType = "video"
@@ -249,7 +271,7 @@ func itemToIGPost(item map[string]any) map[string]any {
 		}
 	}
 
-	videoViews := utils.NumVal(item, "videoViewCount", "video_view_count", "videoPlayCount")
+	videoViews := utils.NumVal(item, "videoPlayCount", "videoViewCount", "video_view_count")
 	shares := utils.NumVal(item, "sharesCount", "shares_count", "reshareCount", "videoShareCount")
 
 	return map[string]any{

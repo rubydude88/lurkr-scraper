@@ -74,6 +74,9 @@ export async function igFetchPosts(): Promise<void> {
     if (data.error) { showError(data.error); igRenderPostsEmpty(); return; }
 
     setIgPostsData(data.posts || []);
+    igDateSortDir = 'desc';
+    const igInd = document.getElementById('ig-sort-date-indicator');
+    if (igInd) igInd.textContent = '';
     igRenderProfile(data.profile || null);
     igRenderPostsTable();
     igPopulateDropdown();
@@ -165,6 +168,7 @@ export function igRenderPostsTable(): void {
 
 function igTypeBadge(type: string): string {
   const t = (type || '').toLowerCase();
+  if (t === 'reel') return '<span class="badge badge-vertical">🎬 Reel</span>';
   if (t === 'video') return '<span class="badge badge-vertical">🎬 Video</span>';
   if (t === 'sidecar' || t === 'album') return '<span class="badge badge-horizontal">🖼 Album</span>';
   return '<span class="badge badge-unknown">📷 Image</span>';
@@ -323,4 +327,21 @@ export function igExportCommentsXLSX(): void {
     })),
     'Comments', `instagram_comments_${getTimestamp()}.xlsx`
   );
+}
+
+// ── Sort by date ──────────────────────────────────────────────────────────────
+let igDateSortDir: 'desc' | 'asc' = 'desc';
+
+export function igSortByDate(): void {
+  if (!igPostsData.length) return;
+  igDateSortDir = igDateSortDir === 'desc' ? 'asc' : 'desc';
+  const dir = igDateSortDir;
+  setIgPostsData([...igPostsData].sort((a, b) => {
+    const ta = a.timestamp ? new Date(a.timestamp).getTime() : 0;
+    const tb = b.timestamp ? new Date(b.timestamp).getTime() : 0;
+    return dir === 'desc' ? tb - ta : ta - tb;
+  }));
+  const indicator = document.getElementById('ig-sort-date-indicator');
+  if (indicator) indicator.textContent = dir === 'desc' ? '↓' : '↑';
+  igRenderPostsTable();
 }

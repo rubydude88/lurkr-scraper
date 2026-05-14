@@ -75,6 +75,9 @@ export async function ttFetchVideos(): Promise<void> {
     if (data.error) { showError(data.error); ttRenderVideosEmpty(); return; }
 
     setTtVideosData(data.videos || []);
+    ttDateSortDir = 'desc';
+    const ttInd = document.getElementById('tt-sort-date-indicator');
+    if (ttInd) ttInd.textContent = '';
     ttRenderProfile(data.profile || null);
     ttRenderVideosTable();
     ttPopulateDropdown();
@@ -311,4 +314,21 @@ export function ttExportCommentsXLSX(): void {
     })),
     'Comments', `tiktok_comments_${getTimestamp()}.xlsx`
   );
+}
+
+// ── Sort by date ──────────────────────────────────────────────────────────────
+let ttDateSortDir: 'desc' | 'asc' = 'desc';
+
+export function ttSortByDate(): void {
+  if (!ttVideosData.length) return;
+  ttDateSortDir = ttDateSortDir === 'desc' ? 'asc' : 'desc';
+  const dir = ttDateSortDir;
+  setTtVideosData([...ttVideosData].sort((a, b) => {
+    const ta = a.published ? new Date(a.published).getTime() : 0;
+    const tb = b.published ? new Date(b.published).getTime() : 0;
+    return dir === 'desc' ? tb - ta : ta - tb;
+  }));
+  const indicator = document.getElementById('tt-sort-date-indicator');
+  if (indicator) indicator.textContent = dir === 'desc' ? '↓' : '↑';
+  ttRenderVideosTable();
 }

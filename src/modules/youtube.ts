@@ -50,6 +50,9 @@ export async function ytFetchChannelAndVideos(): Promise<void> {
       ytRenderVideosEmpty();
     } else {
       setYtVideosData(vidData.videos || []);
+      ytDateSortDir = 'desc';
+      const ytInd = document.getElementById('yt-sort-date-indicator');
+      if (ytInd) ytInd.textContent = '';
       ytRenderVideosTable();
       const countEl = document.getElementById('yt-videos-count');
       if (countEl) countEl.textContent = `${ytVideosData.length} videos fetched`;
@@ -158,8 +161,10 @@ export async function ytFetchVideos(): Promise<void> {
     if (data.error) { showError(data.error); ytRenderVideosEmpty(); return; }
 
     setYtVideosData(data.videos || []);
+    ytDateSortDir = 'desc';
+    const ytInd2 = document.getElementById('yt-sort-date-indicator');
+    if (ytInd2) ytInd2.textContent = '';
     ytRenderVideosTable();
-
     const countEl = document.getElementById('yt-videos-count');
     if (countEl) countEl.textContent = `${ytVideosData.length} videos fetched`;
     if (exportRow) exportRow.style.display = ytVideosData.length ? 'flex' : 'none';
@@ -485,4 +490,21 @@ export function ytExportCommentsXLSX(): void {
     })),
     'Comments', `youtube_comments_${getTimestamp()}.xlsx`
   );
+}
+
+// ── Sort by date ──────────────────────────────────────────────────────────────
+let ytDateSortDir: 'desc' | 'asc' = 'desc';
+
+export function ytSortByDate(): void {
+  if (!ytVideosData.length) return;
+  ytDateSortDir = ytDateSortDir === 'desc' ? 'asc' : 'desc';
+  const dir = ytDateSortDir;
+  setYtVideosData([...ytVideosData].sort((a, b) => {
+    const ta = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+    const tb = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+    return dir === 'desc' ? tb - ta : ta - tb;
+  }));
+  const indicator = document.getElementById('yt-sort-date-indicator');
+  if (indicator) indicator.textContent = dir === 'desc' ? '↓' : '↑';
+  ytRenderVideosTable();
 }
